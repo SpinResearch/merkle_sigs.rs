@@ -1,0 +1,9 @@
+[package]
+name = "merkle_sigs"
+version = "0.1.0"
+authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
+
+[dependencies]
+rust-crypto = "^0.2.36"
+merkle = "^0.1.0"
+lamport_sigs = "^0.1.1"
