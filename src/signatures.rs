@@ -4,7 +4,7 @@ use crypto::digest::Digest;
 use merkle::{MerkleTree, Proof};
 use std::io::{Error, ErrorKind};
 
-pub type MerkleSignature<D>  = (LamportSignatureData, PublicKey<D>, Proof<D, PublicKey<D>>);
+pub type MerkleSignature<D>  = (LamportSignatureData, Proof<D, PublicKey<D>>);
 pub type MerkleSignedData<D, T> = (Vec<T>, MerkleSignature<D>);
 
 //TODO: Error management. Currently forcing unwrap within the map.
@@ -29,7 +29,7 @@ pub fn sign_data_vec<D: Digest+Clone, T: AsRef<[u8]>>(data: &Vec<T>,
 
     let sig_pair = signatures.into_iter()
                              .zip(proofs)
-                             .map(|(sigs, (proof, pub_key))| (sigs, pub_key,proof))
+                             .map(|(sigs, (proof, _))| (sigs, proof))
                              .collect::<Vec<_>>();
     sig_pair
 }
@@ -38,11 +38,11 @@ pub fn sign_data_vec<D: Digest+Clone, T: AsRef<[u8]>>(data: &Vec<T>,
 pub fn verify_data_vec_signature<D: Digest+Clone, T: Into<Vec<u8>>>(data: T,
                                                                     signature: &MerkleSignature<D>,
                                                                     root_hash: &Vec<u8>) -> io::Result<()>{
-    let (ref sig, ref pub_key, ref proof) = *signature;
+    let (ref sig, ref proof) = *signature;
 
     let valid_root = proof.validate(&root_hash);
     let data_vec: Vec<u8> = data.into();
-    let valid_sig  = pub_key.verify_signature(&sig, data_vec.as_slice());
+    let valid_sig  = proof.value.verify_signature(&sig, data_vec.as_slice());
 
     if !valid_root {
         return Err(Error::new(ErrorKind::Other, "The inclusion proof failed to validate."));
