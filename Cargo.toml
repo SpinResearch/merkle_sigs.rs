@@ -5,5 +5,8 @@ authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
 
 [dependencies]
 rust-crypto = "^0.2.36"
-merkle = "^0.1.0"
 lamport_sigs = "^0.1.1"
+
+[dependencies.merkle]
+git = "https://github.com/SpinResearch/merkle.rs"
+features = ["serialization-protobuf"]

@@ -16,7 +16,7 @@ pub fn sign_data_vec<D: Digest+Clone, T: AsRef<[u8]>>(data: &Vec<T>,
                                  .map(|priv_key| priv_key.public_key())
                                  .collect::<Vec<_>>();
 
-    let tree   = MerkleTree::from_vec(digest, leaf_pub_keys.clone());
+    let tree   = MerkleTree::from_vec(digest, leaf_pub_keys.clone()).unwrap();
 
     let signatures = leaf_keys.iter_mut()
                               .zip(data.iter())
@@ -24,12 +24,12 @@ pub fn sign_data_vec<D: Digest+Clone, T: AsRef<[u8]>>(data: &Vec<T>,
                               .collect::<Vec<_>>();
 
     let proofs = leaf_pub_keys.into_iter()
-                              .map(|pub_key| (tree.gen_proof(&pub_key).unwrap(), pub_key))
+                              .map(|pub_key| (tree.gen_proof(pub_key).unwrap()))
                               .collect::<Vec<_>>();
 
     let sig_pair = signatures.into_iter()
                              .zip(proofs)
-                             .map(|(sigs, (proof, _))| (sigs, proof))
+                             .map(|(sigs, proof)| (sigs, proof))
                              .collect::<Vec<_>>();
     sig_pair
 }
