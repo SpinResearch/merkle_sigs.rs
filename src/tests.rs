@@ -1,6 +1,8 @@
 #![cfg(test)]
 use crypto::sha3::Sha3;
 use signatures::{verify_data_vec_signature, sign_data_vec};
+use Proof;
+use PublicKey;
 
 #[test]
 fn test_signature_verification_passes() {
@@ -32,4 +34,29 @@ fn test_same_root_hash() {
             assert_eq!(root_hash.clone().unwrap(), proof.root_hash);
         }
     }
+}
+
+
+#[test]
+fn serialization() {
+    let vec = vec!["0", "1", "2"];
+    let digest = Sha3::sha3_512();
+    let signatures = sign_data_vec(&vec, digest);
+    let (ref sig, ref proof) = signatures[2];
+
+    let proof_bytes = proof.clone().write_to_bytes().unwrap();
+
+    let p = Proof::<Sha3, Vec<u8>>::parse_from_bytes(&proof_bytes, digest).unwrap().unwrap();
+
+    let proof2 = Proof {
+        digest: digest,
+        lemma: p.lemma,
+        root_hash: p.root_hash,
+        value: PublicKey::from_vec(p.value, Sha3::sha3_512()).unwrap(),
+    };
+
+    let root_hash = proof2.root_hash.clone();
+    let s2 = (sig.clone(), proof2);
+    let data: Vec<u8> = String::from("2").into_bytes();
+    assert!(verify_data_vec_signature(data, &s2, &root_hash).is_ok());
 }

@@ -5,7 +5,7 @@ authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
 
 [dependencies]
 rust-crypto = "^0.2.36"
-lamport_sigs = "^0.1.1"
+lamport_sigs = {git = "https://github.com/SpinResearch/lamport.rs"}
 
 [dependencies.merkle]
 git = "https://github.com/SpinResearch/merkle.rs"
