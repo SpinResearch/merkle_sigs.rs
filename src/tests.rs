@@ -8,7 +8,7 @@ use PublicKey;
 fn test_signature_verification_passes() {
     let vec = vec!["0", "1", "2"];
     let digest = Sha3::sha3_512();
-    let signatures = sign_data_vec(&vec, digest);
+    let signatures = sign_data_vec(&vec, digest).unwrap();
     let ref s0 = signatures[0];
     let ref s1 = signatures[1];
     let ref s2 = signatures[2];
@@ -24,7 +24,7 @@ fn test_signature_verification_passes() {
 fn test_same_root_hash() {
     let vec = vec!["I", "won't", "call", "you", "President"];
     let digest = Sha3::sha3_512();
-    let signatures = sign_data_vec(&vec, digest);
+    let signatures = sign_data_vec(&vec, digest).unwrap();
 
     let mut root_hash: Option<Vec<u8>> = None;
     for (_, proof) in signatures {
@@ -41,7 +41,7 @@ fn test_same_root_hash() {
 fn serialization() {
     let vec = vec!["0", "1", "2"];
     let digest = Sha3::sha3_512();
-    let signatures = sign_data_vec(&vec, digest);
+    let signatures = sign_data_vec(&vec, digest).unwrap();
     let (ref sig, ref proof) = signatures[2];
 
     let proof_bytes = proof.clone().write_to_bytes().unwrap();
