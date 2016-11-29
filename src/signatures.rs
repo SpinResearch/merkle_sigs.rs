@@ -1,25 +1,25 @@
 use std::io;
 use lamport_sigs::{PrivateKey, PublicKey, LamportSignatureData};
-use crypto::digest::Digest;
+use ring::digest::Algorithm;
 use merkle::{MerkleTree, Proof};
 use std::io::{Error, ErrorKind};
 
-pub type MerkleSignature<D> = (LamportSignatureData, Proof<D, PublicKey<D>>);
-pub type MerkleSignedData<D, T> = (Vec<T>, MerkleSignature<D>);
+pub type MerkleSignature = (LamportSignatureData, Proof<PublicKey>);
+pub type MerkleSignedData<T> = (Vec<T>, MerkleSignature);
 
 fn new_err(reason: &str) -> Error {
     Error::new(ErrorKind::Other, format!("A signature could not be produced because {}", reason))
 }
 
-pub fn sign_data_vec<D, T>(data: &Vec<T>, digest: D) -> io::Result<Vec<MerkleSignature<D>>>
-        where D: Digest + Clone, T: AsRef<[u8]> {
+pub fn sign_data_vec<T>(data: &Vec<T>, algorithm: &'static Algorithm) -> io::Result<Vec<MerkleSignature>>
+        where T: AsRef<[u8]> {
 
-    let mut leaf_keys = vec![PrivateKey::new(digest.clone()); data.len()];
+    let mut leaf_keys = vec![PrivateKey::new(algorithm); data.len()];
     let leaf_pub_keys = leaf_keys.iter()
         .map(|priv_key| priv_key.public_key())
         .collect::<Vec<_>>();
 
-    let tree_opt = MerkleTree::from_vec(digest, leaf_pub_keys.clone());
+    let tree_opt = MerkleTree::from_vec(algorithm, leaf_pub_keys.clone());
 
     if tree_opt.is_none() {
         return Err(new_err("an issue occured while generating the signing tree."));
@@ -49,8 +49,8 @@ pub fn sign_data_vec<D, T>(data: &Vec<T>, digest: D) -> io::Result<Vec<MerkleSig
 }
 
 /// Verifies the signature of the data. Returns an error if data couldn't be verified.
-pub fn verify_data_vec_signature<D, T>(data: T, signature: &MerkleSignature<D>, root_hash: &Vec<u8>) -> io::Result<()>
-        where D: Digest + Clone, T: Into<Vec<u8>> {
+pub fn verify_data_vec_signature<T>(data: T, signature: &MerkleSignature, root_hash: &Vec<u8>) -> io::Result<()>
+        where T: Into<Vec<u8>> {
 
     let (ref sig, ref proof) = *signature;
 

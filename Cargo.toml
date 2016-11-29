@@ -4,8 +4,8 @@ version = "0.1.0"
 authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
 
 [dependencies]
-rust-crypto = "^0.2.36"
-lamport_sigs = {git = "https://github.com/SpinResearch/lamport.rs"}
+ring = "0.6.0-alpha"
+lamport_sigs = { git = "https://github.com/SpinResearch/lamport.rs" }
 
 [dependencies.merkle]
 git = "https://github.com/SpinResearch/merkle.rs"

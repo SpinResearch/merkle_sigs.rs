@@ -1,13 +1,15 @@
 #![cfg(test)]
-use crypto::sha3::Sha3;
+use ring::digest::{Algorithm, SHA512};
 use signatures::{verify_data_vec_signature, sign_data_vec};
 use Proof;
 use PublicKey;
 
+#[allow(non_upper_case_globals)]
+static digest: &'static Algorithm = &SHA512;
+
 #[test]
 fn test_signature_verification_passes() {
     let vec = vec!["0", "1", "2"];
-    let digest = Sha3::sha3_512();
     let signatures = sign_data_vec(&vec, digest).unwrap();
     let ref s0 = signatures[0];
     let ref s1 = signatures[1];
@@ -23,7 +25,6 @@ fn test_signature_verification_passes() {
 #[test]
 fn test_same_root_hash() {
     let vec = vec!["I", "won't", "call", "you", "President"];
-    let digest = Sha3::sha3_512();
     let signatures = sign_data_vec(&vec, digest).unwrap();
 
     let mut root_hash: Option<Vec<u8>> = None;
@@ -40,19 +41,18 @@ fn test_same_root_hash() {
 #[test]
 fn serialization() {
     let vec = vec!["0", "1", "2"];
-    let digest = Sha3::sha3_512();
     let signatures = sign_data_vec(&vec, digest).unwrap();
     let (ref sig, ref proof) = signatures[2];
 
     let proof_bytes = proof.clone().write_to_bytes().unwrap();
 
-    let p = Proof::<Sha3, Vec<u8>>::parse_from_bytes(&proof_bytes, digest).unwrap().unwrap();
+    let p = Proof::<Vec<u8>>::parse_from_bytes(&proof_bytes, digest).unwrap().unwrap();
 
     let proof2 = Proof {
-        digest: digest,
+        algorithm: digest,
         lemma: p.lemma,
         root_hash: p.root_hash,
-        value: PublicKey::from_vec(p.value, Sha3::sha3_512()).unwrap(),
+        value: PublicKey::from_vec(p.value, digest).unwrap(),
     };
 
     let root_hash = proof2.root_hash.clone();

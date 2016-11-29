@@ -3,7 +3,7 @@
 #[doc(no_inline)]
 extern crate lamport_sigs;
 extern crate merkle;
-extern crate crypto;
+extern crate ring;
 
 mod signatures;
 pub use signatures::{MerkleSignature, MerkleSignedData, verify_data_vec_signature, sign_data_vec};
