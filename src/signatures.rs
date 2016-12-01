@@ -4,13 +4,16 @@ use ring::digest::Algorithm;
 use merkle::{MerkleTree, Proof};
 use std::io::{Error, ErrorKind};
 
+/// A type alias defining a Merkle signature. That includes both the Lamport leaf signature and inclusion proof.
 pub type MerkleSignature = (LamportSignatureData, Proof<PublicKey>);
+/// A type alias defining Merkle signed data. That includes the data being signed along with the signature.
 pub type MerkleSignedData<T> = (Vec<T>, MerkleSignature);
 
 fn new_err(reason: &str) -> Error {
     Error::new(ErrorKind::Other, format!("A signature could not be produced because {}", reason))
 }
 
+/// Signs the entries of the data vector
 pub fn sign_data_vec<T>(data: &Vec<T>, algorithm: &'static Algorithm) -> io::Result<Vec<MerkleSignature>>
         where T: AsRef<[u8]> {
 
@@ -55,7 +58,7 @@ pub fn verify_data_vec_signature<T>(data: T, signature: &MerkleSignature, root_h
     let (ref sig, ref proof) = *signature;
 
     let valid_root = proof.validate(root_hash);
-    let data_vec   = data.into() as Vec<u8>;
+    let data_vec   = data.into();
     let valid_sig  = proof.value.verify_signature(sig, data_vec.as_slice());
 
     if !valid_root {

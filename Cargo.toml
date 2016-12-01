@@ -1,6 +1,6 @@
 [package]
 name = "merkle_sigs"
-version = "0.1.0"
+version = "1.0.0"
 authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
 
 [dependencies]
