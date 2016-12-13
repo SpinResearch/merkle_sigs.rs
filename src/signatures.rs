@@ -34,10 +34,11 @@ impl Into<Vec<u8>> for MerklePublicKey {
 
 /// A type alias defining a Merkle signature. That includes both the Lamport leaf signature and inclusion proof.
 pub type MerkleSignature = (LamportSignatureData, Proof<MerklePublicKey>);
+
 /// A type alias defining Merkle signed data. That includes the data being signed along with the signature.
 pub type MerkleSignedData<T> = (Vec<T>, MerkleSignature);
 
-fn new_err(reason: &str) -> Error {
+fn signing_error(reason: &str) -> Error {
     Error::new(ErrorKind::Other, format!("A signature could not be produced because {}", reason))
 }
 
@@ -55,7 +56,9 @@ pub fn sign_data_vec<T>(data: &Vec<T>, algorithm: &'static Algorithm) -> io::Res
         .map(|priv_key| priv_key.public_key())
         .collect::<Vec<_>>();
 
-    let wrapped_leafs = leaf_pub_keys.clone().into_iter().map(|pk| MerklePublicKey::new(pk)).collect::<Vec<_>>();
+    let wrapped_leafs = leaf_pub_keys.clone().into_iter()
+        .map(|pk| MerklePublicKey::new(pk))
+        .collect::<Vec<_>>();
 
     let tree = MerkleTree::from_vec(algorithm, wrapped_leafs);
 
@@ -70,14 +73,18 @@ pub fn sign_data_vec<T>(data: &Vec<T>, algorithm: &'static Algorithm) -> io::Res
 
     match (signatures_opt, proofs_opt) {
         (_, None) =>
-            Err(new_err("an issue occured while generating the inclusion proofs.")),
+            Err(signing_error("an issue occured while generating the inclusion proofs.")),
 
         (Err(err), _) =>
-            Err(new_err(&format!("an issue occured while signing the data: {}", err))),
+            Err(signing_error(&format!("an issue occured while signing the data: {}", err))),
 
         (Ok(signatures), Some(proofs)) =>
             Ok(signatures.into_iter().zip(proofs).collect())
     }
+}
+
+fn verif_error(reason: &str) -> Error {
+    Error::new(ErrorKind::Other, reason)
 }
 
 /// Verifies the signature of the data. Returns an error if data couldn't be verified.
@@ -92,13 +99,11 @@ pub fn verify_data_vec_signature<T>(data: T, signature: &MerkleSignature, root_h
     let valid_sig  = proof.value.key.verify_signature(sig, data_vec.as_slice());
 
     if !valid_root {
-        return Err(Error::new(ErrorKind::Other,
-                              "The inclusion proof failed to validate."));
+        return Err(verif_error("The inclusion proof failed to validate."));
     }
 
     if !valid_sig {
-        return Err(Error::new(ErrorKind::Other,
-                              "The signature could not be properly verified."));
+        return Err(verif_error("The signature could not be properly verified."));
     }
 
     Ok(())
