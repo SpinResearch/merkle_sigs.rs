@@ -27,6 +27,7 @@ pub use merkle::Proof;
 
 pub use lamport_sigs::PublicKey;
 pub use signatures::{
+    MerklePublicKey,
     MerkleSignature,
     MerkleSignedData,
     verify_data_vec_signature,

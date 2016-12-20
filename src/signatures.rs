@@ -5,11 +5,14 @@ use merkle::{MerkleTree, Proof, Hashable};
 use std::io::{Error, ErrorKind};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
+/// A wrapper struct around a Lamport public key that implements Hashable.
 pub struct MerklePublicKey {
+    /// The wrapped Lamport public key.
     pub key: PublicKey,
 }
 
 impl MerklePublicKey {
+    /// Convenience method to wrap a Lamport `PublicKey` into a `MerklePublicKey`
     pub fn new(pk: PublicKey) -> MerklePublicKey {
         MerklePublicKey{
             key: pk
