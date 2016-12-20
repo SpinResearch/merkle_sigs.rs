@@ -1,11 +1,36 @@
 use std::io;
 use lamport_sigs::{PrivateKey, PublicKey, LamportSignatureData};
-use ring::digest::Algorithm;
-use merkle::{MerkleTree, Proof};
+use ring::digest::{Algorithm, Context};
+use merkle::{MerkleTree, Proof, Hashable};
 use std::io::{Error, ErrorKind};
 
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub struct MerklePublicKey {
+    pub key: PublicKey,
+}
+
+impl MerklePublicKey {
+    pub fn new(pk: PublicKey) -> MerklePublicKey {
+        MerklePublicKey{
+            key: pk
+        }
+    }
+}
+
+impl Hashable for MerklePublicKey {
+    fn update_context(&self, context: &mut Context) {
+         context.update(&self.key.to_bytes());
+    }
+}
+
+impl Into<Vec<u8>> for MerklePublicKey {
+    fn into(self) -> Vec<u8> {
+        self.key.to_bytes()
+    }
+}
+
 /// A type alias defining a Merkle signature. That includes both the Lamport leaf signature and inclusion proof.
-pub type MerkleSignature = (LamportSignatureData, Proof<PublicKey>);
+pub type MerkleSignature = (LamportSignatureData, Proof<MerklePublicKey>);
 /// A type alias defining Merkle signed data. That includes the data being signed along with the signature.
 pub type MerkleSignedData<T> = (Vec<T>, MerkleSignature);
 
@@ -17,21 +42,22 @@ fn new_err(reason: &str) -> Error {
 pub fn sign_data_vec<T>(data: &Vec<T>, algorithm: &'static Algorithm) -> io::Result<Vec<MerkleSignature>>
         where T: AsRef<[u8]> {
 
-    let mut leaf_keys = vec![PrivateKey::new(algorithm); data.len()];
+    let mut leaf_keys = (0..data.len())
+        .map(|_| PrivateKey::new(algorithm))
+        .collect::<Vec<_>>();
+
+    debug_assert!(data.len() == leaf_keys.len());
+
     let leaf_pub_keys = leaf_keys.iter()
         .map(|priv_key| priv_key.public_key())
         .collect::<Vec<_>>();
 
-    let tree_opt = MerkleTree::from_vec(algorithm, leaf_pub_keys.clone());
+    let wrapped_leafs = leaf_pub_keys.clone().into_iter().map(|pk| MerklePublicKey::new(pk)).collect::<Vec<_>>();
 
-    if tree_opt.is_none() {
-        return Err(new_err("an issue occured while generating the signing tree."));
-    }
-
-    let tree = tree_opt.unwrap();
+    let tree = MerkleTree::from_vec(algorithm, wrapped_leafs);
 
     let proofs_opt = leaf_pub_keys.into_iter()
-        .map(|pub_key| tree.gen_proof(pub_key))
+        .map(|pub_key| tree.gen_proof(MerklePublicKey::new(pub_key)))
         .collect::<Option<Vec<_>>>();
 
     let signatures_opt = leaf_keys.iter_mut()
@@ -59,7 +85,8 @@ pub fn verify_data_vec_signature<T>(data: T, signature: &MerkleSignature, root_h
 
     let valid_root = proof.validate(root_hash);
     let data_vec   = data.into();
-    let valid_sig  = proof.value.verify_signature(sig, data_vec.as_slice());
+
+    let valid_sig  = proof.value.key.verify_signature(sig, data_vec.as_slice());
 
     if !valid_root {
         return Err(Error::new(ErrorKind::Other,

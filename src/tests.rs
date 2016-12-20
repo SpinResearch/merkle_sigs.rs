@@ -1,8 +1,9 @@
 #![cfg(test)]
 use ring::digest::{Algorithm, SHA512};
-use signatures::{verify_data_vec_signature, sign_data_vec};
+use signatures::{MerklePublicKey, verify_data_vec_signature, sign_data_vec};
 use Proof;
 use PublicKey;
+use std::collections::HashSet;
 
 #[allow(non_upper_case_globals)]
 static digest: &'static Algorithm = &SHA512;
@@ -37,6 +38,23 @@ fn test_same_root_hash() {
     }
 }
 
+#[test]
+fn test_different_leaf_keys() {
+    let vec = vec!["I", "won't", "call", "you", "President"];
+    let signatures = sign_data_vec(&vec, digest).unwrap();
+
+    let mut leafs = HashSet::new();
+    for (_, proof) in signatures {
+        let leaf = proof.value;
+
+        if !leafs.contains(&leaf) {
+            leafs.insert(leaf);
+        } else {
+            assert!(false, "Duplicate leaf values");
+        }
+    }
+}
+
 
 #[test]
 fn serialization() {
@@ -52,7 +70,7 @@ fn serialization() {
         algorithm: digest,
         lemma: p.lemma,
         root_hash: p.root_hash,
-        value: PublicKey::from_vec(p.value, digest).unwrap(),
+        value: MerklePublicKey::new(PublicKey::from_vec(p.value, digest).unwrap()),
     };
 
     let root_hash = proof2.root_hash.clone();
