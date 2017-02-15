@@ -4,9 +4,9 @@ version = "1.0.0"
 authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
 
 [dependencies]
-ring = "0.6.0-alpha"
-lamport_sigs = { git = "https://github.com/SpinResearch/lamport.rs" }
+ring = "^0.6.0"
+lamport_sigs = "^0.1.2"
 
 [dependencies.merkle]
-git = "https://github.com/SpinResearch/merkle.rs"
+version = "^1.1.0"
 features = ["serialization-protobuf"]
