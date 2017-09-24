@@ -13,8 +13,8 @@ repository    = "https://github.com/SpinResearch/merkle_sigs.rs"
 
 [dependencies]
 ring = "^0.11.0"
-lamport_sigs = "^0.3.0"
+lamport_sigs = "^0.4.0"
 
 [dependencies.merkle]
-version = "^1.3.0"
+version = "^1.4.0"
 features = ["serialization-protobuf"]
