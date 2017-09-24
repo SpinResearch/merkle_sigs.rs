@@ -3,7 +3,7 @@ name = "merkle_sigs"
 version = "1.4.1-pre"
 authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
 
-description = "A Rust implementation of Merkle signing"
+description = "Implementation of Merkle signing"
 
 license       = "BSD-3-Clause"
 readme        = "README.md"
