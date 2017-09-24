@@ -17,14 +17,8 @@ mod signatures;
 pub use merkle::Proof;
 
 pub use lamport_sigs::PublicKey;
-pub use signatures::{
-    MerklePublicKey,
-    MerkleSignature,
-    MerkleSignedData,
-    verify_data_vec_signature,
-    sign_data_vec
-};
+pub use signatures::{MerklePublicKey, MerkleSignature, MerkleSignedData,
+                     verify_data_vec_signature, sign_data_vec};
 
 #[cfg(test)]
 mod tests;
-

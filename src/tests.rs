@@ -64,7 +64,9 @@ fn serialization() {
 
     let proof_bytes = proof.clone().write_to_bytes().unwrap();
 
-    let p = Proof::<Vec<u8>>::parse_from_bytes(&proof_bytes, digest).unwrap().unwrap();
+    let p = Proof::<Vec<u8>>::parse_from_bytes(&proof_bytes, digest)
+        .unwrap()
+        .unwrap();
 
     let proof2 = Proof {
         algorithm: digest,
