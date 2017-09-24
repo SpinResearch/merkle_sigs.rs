@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `MessageStatic` trait in crate `protobuf`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, MessageStatic">
+
+    <title>protobuf::core::MessageStatic - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../../normalize.css">
+    <link rel="stylesheet" type="text/css" href="../../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc trait">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'>Trait MessageStatic</p><div class="block items"><ul><li><a href="#required-methods">Required Methods</a></li><li><a href="#provided-methods">Provided Methods</a></li><li><a href="#implementors">Implementors</a></li></ul></div><p class='location'><a href='../index.html'>protobuf</a>::<wbr><a href='index.html'>core</a></p><script>window.sidebarCurrent = {name: 'MessageStatic', ty: 'trait', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content">
+<h1 class='fqn'><span class='in-band'>Trait <a href='../index.html'>protobuf</a>::<wbr><a href='index.html'>core</a>::<wbr><a class="trait" href=''>MessageStatic</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a class='srclink' href='../../src/protobuf/core.rs.html#154-164' title='goto source code'>[src]</a></span></h1>
+<pre class='rust trait'>pub trait MessageStatic: <a class="trait" href="../../protobuf/core/trait.Message.html" title="trait protobuf::core::Message">Message</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html" title="trait core::clone::Clone">Clone</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/default/trait.Default.html" title="trait core::default::Default">Default</a> + <a class="trait" href="https://doc.rust-lang.org/nightly/core/cmp/trait.PartialEq.html" title="trait core::cmp::PartialEq">PartialEq</a> {
+    fn <a href='#tymethod.new' class='fnname'>new</a>() -&gt; Self;
+
+    fn <a href='#method.descriptor_static' class='fnname'>descriptor_static</a>(_: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;) -&gt; &amp;'static <a class="struct" href="../../protobuf/reflect/struct.MessageDescriptor.html" title="struct protobuf::reflect::MessageDescriptor">MessageDescriptor</a> { ... }
+}</pre>
+            <h2 id='required-methods'>Required Methods</h2>
+            <div class='methods'>
+        <h3 id='tymethod.new' class='method'><span id='new.v' class='invisible'><code>fn <a href='#tymethod.new' class='fnname'>new</a>() -&gt; Self</code></span></h3></div>
+            <h2 id='provided-methods'>Provided Methods</h2>
+            <div class='methods'>
+        <h3 id='method.descriptor_static' class='method'><span id='descriptor_static.v' class='invisible'><code>fn <a href='#method.descriptor_static' class='fnname'>descriptor_static</a>(_: <a class="enum" href="https://doc.rust-lang.org/nightly/core/option/enum.Option.html" title="enum core::option::Option">Option</a>&lt;Self&gt;) -&gt; &amp;'static <a class="struct" href="../../protobuf/reflect/struct.MessageDescriptor.html" title="struct protobuf::reflect::MessageDescriptor">MessageDescriptor</a></code></span></h3></div>
+        <h2 id='implementors'>Implementors</h2>
+        <ul class='item-list' id='implementors-list'>
+    <li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.FileDescriptorSet.html" title="struct protobuf::descriptor::FileDescriptorSet">FileDescriptorSet</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.FileDescriptorProto.html" title="struct protobuf::descriptor::FileDescriptorProto">FileDescriptorProto</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.DescriptorProto.html" title="struct protobuf::descriptor::DescriptorProto">DescriptorProto</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.DescriptorProto_ExtensionRange.html" title="struct protobuf::descriptor::DescriptorProto_ExtensionRange">DescriptorProto_ExtensionRange</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.DescriptorProto_ReservedRange.html" title="struct protobuf::descriptor::DescriptorProto_ReservedRange">DescriptorProto_ReservedRange</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.FieldDescriptorProto.html" title="struct protobuf::descriptor::FieldDescriptorProto">FieldDescriptorProto</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.OneofDescriptorProto.html" title="struct protobuf::descriptor::OneofDescriptorProto">OneofDescriptorProto</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.EnumDescriptorProto.html" title="struct protobuf::descriptor::EnumDescriptorProto">EnumDescriptorProto</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.EnumValueDescriptorProto.html" title="struct protobuf::descriptor::EnumValueDescriptorProto">EnumValueDescriptorProto</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.ServiceDescriptorProto.html" title="struct protobuf::descriptor::ServiceDescriptorProto">ServiceDescriptorProto</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.MethodDescriptorProto.html" title="struct protobuf::descriptor::MethodDescriptorProto">MethodDescriptorProto</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.FileOptions.html" title="struct protobuf::descriptor::FileOptions">FileOptions</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.MessageOptions.html" title="struct protobuf::descriptor::MessageOptions">MessageOptions</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.FieldOptions.html" title="struct protobuf::descriptor::FieldOptions">FieldOptions</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.OneofOptions.html" title="struct protobuf::descriptor::OneofOptions">OneofOptions</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.EnumOptions.html" title="struct protobuf::descriptor::EnumOptions">EnumOptions</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.EnumValueOptions.html" title="struct protobuf::descriptor::EnumValueOptions">EnumValueOptions</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.ServiceOptions.html" title="struct protobuf::descriptor::ServiceOptions">ServiceOptions</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.MethodOptions.html" title="struct protobuf::descriptor::MethodOptions">MethodOptions</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.UninterpretedOption.html" title="struct protobuf::descriptor::UninterpretedOption">UninterpretedOption</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.UninterpretedOption_NamePart.html" title="struct protobuf::descriptor::UninterpretedOption_NamePart">UninterpretedOption_NamePart</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.SourceCodeInfo.html" title="struct protobuf::descriptor::SourceCodeInfo">SourceCodeInfo</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.SourceCodeInfo_Location.html" title="struct protobuf::descriptor::SourceCodeInfo_Location">SourceCodeInfo_Location</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.GeneratedCodeInfo.html" title="struct protobuf::descriptor::GeneratedCodeInfo">GeneratedCodeInfo</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/descriptor/struct.GeneratedCodeInfo_Annotation.html" title="struct protobuf::descriptor::GeneratedCodeInfo_Annotation">GeneratedCodeInfo_Annotation</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/plugin/struct.CodeGeneratorRequest.html" title="struct protobuf::plugin::CodeGeneratorRequest">CodeGeneratorRequest</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/plugin/struct.CodeGeneratorResponse.html" title="struct protobuf::plugin::CodeGeneratorResponse">CodeGeneratorResponse</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/plugin/struct.CodeGeneratorResponse_File.html" title="struct protobuf::plugin::CodeGeneratorResponse_File">CodeGeneratorResponse_File</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Any.html" title="struct protobuf::well_known_types::Any">Any</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Api.html" title="struct protobuf::well_known_types::Api">Api</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Method.html" title="struct protobuf::well_known_types::Method">Method</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Mixin.html" title="struct protobuf::well_known_types::Mixin">Mixin</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Duration.html" title="struct protobuf::well_known_types::Duration">Duration</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Empty.html" title="struct protobuf::well_known_types::Empty">Empty</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.FieldMask.html" title="struct protobuf::well_known_types::FieldMask">FieldMask</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.SourceContext.html" title="struct protobuf::well_known_types::SourceContext">SourceContext</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Struct.html" title="struct protobuf::well_known_types::Struct">Struct</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Value.html" title="struct protobuf::well_known_types::Value">Value</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.ListValue.html" title="struct protobuf::well_known_types::ListValue">ListValue</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Timestamp.html" title="struct protobuf::well_known_types::Timestamp">Timestamp</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Type.html" title="struct protobuf::well_known_types::Type">Type</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Field.html" title="struct protobuf::well_known_types::Field">Field</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Enum.html" title="struct protobuf::well_known_types::Enum">Enum</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.EnumValue.html" title="struct protobuf::well_known_types::EnumValue">EnumValue</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Option.html" title="struct protobuf::well_known_types::Option">Option</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.DoubleValue.html" title="struct protobuf::well_known_types::DoubleValue">DoubleValue</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.FloatValue.html" title="struct protobuf::well_known_types::FloatValue">FloatValue</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Int64Value.html" title="struct protobuf::well_known_types::Int64Value">Int64Value</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.UInt64Value.html" title="struct protobuf::well_known_types::UInt64Value">UInt64Value</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.Int32Value.html" title="struct protobuf::well_known_types::Int32Value">Int32Value</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.UInt32Value.html" title="struct protobuf::well_known_types::UInt32Value">UInt32Value</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.BoolValue.html" title="struct protobuf::well_known_types::BoolValue">BoolValue</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.StringValue.html" title="struct protobuf::well_known_types::StringValue">StringValue</a></code></li>
+<li><code>impl MessageStatic for <a class="struct" href="../../protobuf/well_known_types/struct.BytesValue.html" title="struct protobuf::well_known_types::BytesValue">BytesValue</a></code></li>
+</ul><script type="text/javascript" async
+                         src="../../implementors/protobuf/core/trait.MessageStatic.js">
+                 </script></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../../";
+        window.currentCrate = "protobuf";
+    </script>
+    <script src="../../main.js"></script>
+    <script defer src="../../search-index.js"></script>
+</body>
+</html>
