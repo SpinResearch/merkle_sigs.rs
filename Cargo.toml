@@ -1,6 +1,6 @@
 [package]
 name = "merkle_sigs"
-version = "1.4.0"
+version = "1.4.1-pre"
 authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
 
 description = "A Rust implementation of Merkle signing"
