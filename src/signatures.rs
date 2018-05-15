@@ -45,7 +45,7 @@ fn signing_error(reason: &str) -> Error {
 
 /// Signs the entries of the data vector
 pub fn sign_data_vec<T>(
-    data: &Vec<T>,
+    data: &[T],
     algorithm: &'static Algorithm,
 ) -> io::Result<Vec<MerkleSignature>>
 where
@@ -65,7 +65,7 @@ where
     let wrapped_leafs = leaf_pub_keys
         .clone()
         .into_iter()
-        .map(|pk| MerklePublicKey::new(pk))
+        .map(MerklePublicKey::new)
         .collect::<Vec<_>>();
 
     let tree = MerkleTree::from_vec(algorithm, wrapped_leafs);
@@ -103,7 +103,7 @@ fn verif_error(reason: &str) -> Error {
 pub fn verify_data_vec_signature<T>(
     data: T,
     signature: &MerkleSignature,
-    root_hash: &Vec<u8>,
+    root_hash: &[u8],
 ) -> io::Result<()>
 where
     T: Into<Vec<u8>>,
