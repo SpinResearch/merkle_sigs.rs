@@ -79,7 +79,7 @@ where
     let signatures_opt = leaf_keys
         .iter_mut()
         .zip(data.iter())
-        .map(|(mut priv_key, data)| priv_key.sign(data.as_ref()))
+        .map(|(priv_key, data)| priv_key.sign(data.as_ref()))
         .collect::<Result<Vec<_>, _>>();
 
     match (signatures_opt, proofs_opt) {
