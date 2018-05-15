@@ -10,8 +10,12 @@
     <title>merkle_sigs - Rust</title>
 
     <link rel="stylesheet" type="text/css" href="../normalize.css">
-    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
-    <link rel="stylesheet" type="text/css" href="../main.css">
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css"
+          id="mainThemeStyle">
+    
+    <link rel="stylesheet" type="text/css" href="../dark.css">
+    <link rel="stylesheet" type="text/css" href="../light.css" id="themeStyle">
+    <script src="../storage.js"></script>
     
 
     
@@ -28,10 +32,18 @@
     
 
     <nav class="sidebar">
+        <div class="sidebar-menu">&#9776;</div>
         
-        <p class='location'>Crate merkle_sigs</p><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'merkle_sigs', ty: 'mod', relpath: '../'};</script>
+        <p class='location'>Crate merkle_sigs</p><div class="sidebar-elems"><div class="block items"><ul><li><a href="#structs">Structs</a></li><li><a href="#functions">Functions</a></li><li><a href="#types">Type Definitions</a></li></ul></div><p class='location'></p><script>window.sidebarCurrent = {name: 'merkle_sigs', ty: 'mod', relpath: '../'};</script></div>
     </nav>
 
+    <div class="theme-picker">
+        <button id="theme-picker" aria-label="Pick another theme!">
+            <img src="../brush.svg" width="18" alt="Pick another theme!">
+        </button>
+        <div id="theme-choices"></div>
+    </div>
+    <script src="../theme.js"></script>
     <nav class="sub">
         <form class="search-form js-only">
             <div class="search-container">
@@ -43,13 +55,11 @@
         </form>
     </nav>
 
-    <section id='main' class="content">
-<h1 class='fqn'><span class='in-band'>Crate <a class="mod" href=''>merkle_sigs</a></span><span class='out-of-band'><span id='render-detail'>
+    <section id='main' class="content"><h1 class='fqn'><span class='in-band'>Crate <a class="mod" href=''>merkle_sigs</a></span><span class='out-of-band'><span id='render-detail'>
                    <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
                        [<span class='inner'>&#x2212;</span>]
                    </a>
-               </span><a class='srclink' href='../src/merkle_sigs/lib.rs.html#1-24' title='goto source code'>[src]</a></span></h1>
-<div class='docblock'><p><code>merkle_sigs</code> implements Merkle signatures in Rust.</p>
+               </span><a class='srclink' href='../src/merkle_sigs/lib.rs.html#1-20' title='goto source code'>[src]</a></span></h1><div class='docblock'><p><code>merkle_sigs</code> implements Merkle signatures in Rust.</p>
 </div><h2 id='structs' class='section-header'><a href="#structs">Structs</a></h2>
 <table>
                        <tr class=' module-item'>
@@ -57,6 +67,7 @@
                                   title='struct merkle_sigs::MerklePublicKey'>MerklePublicKey</a></td>
                            <td class='docblock-short'>
                                 <p>A wrapper struct around a Lamport public key that implements Hashable.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -65,6 +76,7 @@
                            <td class='docblock-short'>
                                 <p>An inclusion proof represent the fact that a <code>value</code> is a member
 of a <code>MerkleTree</code> with root hash <code>root_hash</code>, and hash function <code>algorithm</code>.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -72,6 +84,7 @@ of a <code>MerkleTree</code> with root hash <code>root_hash</code>, and hash fun
                                   title='struct merkle_sigs::PublicKey'>PublicKey</a></td>
                            <td class='docblock-short'>
                                 <p>A one-time signing public key</p>
+
                            </td>
                        </tr></table><h2 id='functions' class='section-header'><a href="#functions">Functions</a></h2>
 <table>
@@ -80,13 +93,15 @@ of a <code>MerkleTree</code> with root hash <code>root_hash</code>, and hash fun
                                   title='fn merkle_sigs::sign_data_vec'>sign_data_vec</a></td>
                            <td class='docblock-short'>
                                 <p>Signs the entries of the data vector</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
                            <td><a class="fn" href="fn.verify_data_vec_signature.html"
                                   title='fn merkle_sigs::verify_data_vec_signature'>verify_data_vec_signature</a></td>
                            <td class='docblock-short'>
-                                <p>Verifies the signature of the data. Returns an error if data couldn&#39;t be verified.</p>
+                                <p>Verifies the signature of the data. Returns an error if data couldn't be verified.</p>
+
                            </td>
                        </tr></table><h2 id='types' class='section-header'><a href="#types">Type Definitions</a></h2>
 <table>
@@ -95,6 +110,7 @@ of a <code>MerkleTree</code> with root hash <code>root_hash</code>, and hash fun
                                   title='type merkle_sigs::MerkleSignature'>MerkleSignature</a></td>
                            <td class='docblock-short'>
                                 <p>A type alias defining a Merkle signature. That includes both the Lamport leaf signature and inclusion proof.</p>
+
                            </td>
                        </tr>
                        <tr class=' module-item'>
@@ -102,6 +118,7 @@ of a <code>MerkleTree</code> with root hash <code>root_hash</code>, and hash fun
                                   title='type merkle_sigs::MerkleSignedData'>MerkleSignedData</a></td>
                            <td class='docblock-short'>
                                 <p>A type alias defining Merkle signed data. That includes the data being signed along with the signature.</p>
+
                            </td>
                        </tr></table></section>
     <section id='search' class="content hidden"></section>
@@ -116,18 +133,22 @@ of a <code>MerkleTree</code> with root hash <code>root_hash</code>, and hash fun
                 <h2>Keyboard Shortcuts</h2>
 
                 <dl>
-                    <dt>?</dt>
+                    <dt><kbd>?</kbd></dt>
                     <dd>Show this help dialog</dd>
-                    <dt>S</dt>
+                    <dt><kbd>S</kbd></dt>
                     <dd>Focus the search field</dd>
-                    <dt>&larrb;</dt>
+                    <dt><kbd>↑</kbd></dt>
                     <dd>Move up in search results</dd>
-                    <dt>&rarrb;</dt>
+                    <dt><kbd>↓</kbd></dt>
                     <dd>Move down in search results</dd>
-                    <dt>&#9166;</dt>
+                    <dt><kbd>↹</kbd></dt>
+                    <dd>Switch tab</dd>
+                    <dt><kbd>&#9166;</kbd></dt>
                     <dd>Go to active search result</dd>
-                    <dt>+</dt>
-                    <dd>Collapse/expand all sections</dd>
+                    <dt><kbd>+</kbd></dt>
+                    <dd>Expand all sections</dd>
+                    <dt><kbd>-</kbd></dt>
+                    <dd>Collapse all sections</dd>
                 </dl>
             </div>
 
