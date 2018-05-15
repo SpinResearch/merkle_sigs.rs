@@ -1,7 +1,7 @@
-use std::io;
-use lamport_sigs::{PrivateKey, PublicKey, LamportSignatureData};
+use lamport_sigs::{LamportSignatureData, PrivateKey, PublicKey};
+use merkle::{Hashable, MerkleTree, Proof};
 use ring::digest::{Algorithm, Context};
-use merkle::{MerkleTree, Proof, Hashable};
+use std::io;
 use std::io::{Error, ErrorKind};
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
@@ -51,7 +51,6 @@ pub fn sign_data_vec<T>(
 where
     T: AsRef<[u8]>,
 {
-
     let mut leaf_keys = (0..data.len())
         .map(|_| PrivateKey::new(algorithm))
         .collect::<Vec<_>>();
@@ -87,9 +86,10 @@ where
             "an issue occured while generating the inclusion proofs.",
         )),
 
-        (Err(err), _) => Err(signing_error(
-            &format!("an issue occured while signing the data: {}", err),
-        )),
+        (Err(err), _) => Err(signing_error(&format!(
+            "an issue occured while signing the data: {}",
+            err
+        ))),
 
         (Ok(signatures), Some(proofs)) => Ok(signatures.into_iter().zip(proofs).collect()),
     }
@@ -108,7 +108,6 @@ pub fn verify_data_vec_signature<T>(
 where
     T: Into<Vec<u8>>,
 {
-
     let (ref sig, ref proof) = *signature;
 
     let valid_root = proof.validate(root_hash);

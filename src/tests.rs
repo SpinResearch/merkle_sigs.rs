@@ -1,8 +1,8 @@
 #![cfg(test)]
-use ring::digest::{Algorithm, SHA512};
-use signatures::{MerklePublicKey, verify_data_vec_signature, sign_data_vec};
 use Proof;
 use PublicKey;
+use ring::digest::{Algorithm, SHA512};
+use signatures::{sign_data_vec, verify_data_vec_signature, MerklePublicKey};
 use std::collections::HashSet;
 
 #[allow(non_upper_case_globals)]
@@ -54,7 +54,6 @@ fn test_different_leaf_keys() {
         }
     }
 }
-
 
 #[test]
 fn serialization() {
