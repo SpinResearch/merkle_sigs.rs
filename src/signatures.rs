@@ -1,4 +1,4 @@
-use lamport_sigs::{LamportSignatureData, PrivateKey, PublicKey};
+use lamport_sigs::{PrivateKey, PublicKey};
 use merkle::{Hashable, MerkleTree, Proof};
 use ring::digest::{Algorithm, Context};
 use std::io;
@@ -31,7 +31,7 @@ impl Into<Vec<u8>> for MerklePublicKey {
 }
 
 /// A type alias defining a Merkle signature. That includes both the Lamport leaf signature and inclusion proof.
-pub type MerkleSignature = (LamportSignatureData, Proof<MerklePublicKey>);
+pub type MerkleSignature = (Vec<Vec<u8>>, Proof<MerklePublicKey>);
 
 /// A type alias defining Merkle signed data. That includes the data being signed along with the signature.
 pub type MerkleSignedData<T> = (Vec<T>, MerkleSignature);

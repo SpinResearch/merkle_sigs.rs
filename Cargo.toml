@@ -16,7 +16,7 @@ ring = "^0.13.0"
 lamport_sigs = "^0.6.0"
 
 [dependencies.merkle]
-version = "^1.7.0"
+version = "^1.10.0"
 features = ["serialization-protobuf"]
 
 [package.metadata.release]
