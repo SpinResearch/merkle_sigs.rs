@@ -1,6 +1,6 @@
 [package]
 name = "merkle_sigs"
-version = "1.6.1-pre"
+version = "1.7.0"
 authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
 
 description = "Implementation of Merkle signing"
