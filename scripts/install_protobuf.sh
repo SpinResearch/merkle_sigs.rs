@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-PROTOC_VERSION=$(cat PROTOC_VERSION)
+PROTOC_VERSION=$(cat ../PROTOC_VERSION)
 
 check_protoc_version () {
     this_version=`protoc --version`

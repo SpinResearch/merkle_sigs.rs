@@ -22,7 +22,7 @@ matrix:
       rust: nightly
 
     - env: NAME='clippy'
-      rust: nightly-2019-07-19
+      rust: stable
       before_script:
         - rustup component add clippy
       script:
@@ -59,4 +59,4 @@ script:
 before_install:
   - export PATH=$PATH:$HOME/protobuf/bin
   - export PROTOC_VERSION=$(cat PROTOC_VERSION)
-  - bash install_protobuf.sh
+  - bash scripts/install_protobuf.sh
