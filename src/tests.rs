@@ -1,9 +1,9 @@
 #![cfg(test)]
 use ring::digest::{Algorithm, SHA512};
-use signatures::{sign_data_vec, verify_data_vec_signature, MerklePublicKey};
+use crate::signatures::{sign_data_vec, verify_data_vec_signature, MerklePublicKey};
 use std::collections::HashSet;
-use Proof;
-use PublicKey;
+use crate::Proof;
+use crate::PublicKey;
 
 #[allow(non_upper_case_globals)]
 static digest: &'static Algorithm = &SHA512;

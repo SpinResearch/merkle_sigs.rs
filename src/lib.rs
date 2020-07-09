@@ -21,7 +21,7 @@ mod signatures;
 pub use merkle::Proof;
 
 pub use lamport_sigs::PublicKey;
-pub use signatures::{
+pub use crate::signatures::{
     sign_data_vec, verify_data_vec_signature, MerklePublicKey, MerkleSignature, MerkleSignedData,
 };
 
