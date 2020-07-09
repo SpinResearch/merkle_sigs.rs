@@ -1,13 +1,11 @@
 [package]
-name = "merkle_sigs"
-version = "1.7.1-pre"
-authors = ["Frederic Jacobs <github@fredericjacobs.com>"]
-
-description = "Implementation of Merkle signing"
-
+name          = "merkle_sigs"
+version       = "1.7.1-pre"
+authors       = ["Frederic Jacobs <github@fredericjacobs.com>"]
+description   = "Implementation of Merkle signing"
 license       = "BSD-3-Clause"
 readme        = "README.md"
-documentation = "https://spinresearch.github.io/merkle_sigs.rs/merkle_sigs/index.html"
+documentation = "https://docs.rs/merkle_sigs"
 homepage      = "https://github.com/SpinResearch/merkle_sigs.rs"
 repository    = "https://github.com/SpinResearch/merkle_sigs.rs"
 
